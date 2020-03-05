@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -15,6 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class ChatPage extends BasePage {
     private final static By CHAT_INPUT = By.cssSelector(".integri-chat-send-message");
+    private final static By CHAT_TEXTAREA = By.cssSelector("textarea");
 
    public ChatPage(WebDriver driver) {
         super(driver);
@@ -23,10 +25,13 @@ public class ChatPage extends BasePage {
         driver.get("https://dev.integrivideo.com/demo/chat/new");
     }
     public void writeText(String text){
-        driver.findElement(By.cssSelector("textarea")).sendKeys(text);
+        driver.findElement(CHAT_TEXTAREA).sendKeys(text);
     }
     public void clickSend() {
         driver.findElement(CHAT_INPUT).click();
+    }
+    public void clickEnter() {
+        driver.findElement(CHAT_TEXTAREA).sendKeys(Keys.ENTER);
     }
     public void messageShouldExist(int messageIndex, String text) {
         try {
