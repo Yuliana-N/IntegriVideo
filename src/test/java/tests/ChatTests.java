@@ -1,25 +1,27 @@
 package tests;
 
 import org.testng.annotations.Test;
-import pages.ChatPage;
 
 public class ChatTests extends BaseTest {
     @Test
-    public void sendMessageByClick(){
+    public void sendMessageByClick() {
         chatPage.openPage();
+        chatPage.isChatOpened();
         chatPage.writeText("Text");
         chatPage.clickSend();
-        chatPage.messageShouldExist(1,"Text");
+        chatPage.messageShouldExist(1, "Text");
     }
+
     @Test
-    public void sendMessageByEnter(){
+    public void sendMessageByEnter() {
         chatPage.openPage();
+        chatPage.isChatOpened();
         chatPage.writeText("Text");
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1,"Text");
+        chatPage.messageShouldExist(1, "Text");
     }
     @Test
-    public void checkInvite(){
+    public void checkInvite() {
         chatPage.openPage();
         chatPage.clickInvite();
     }
