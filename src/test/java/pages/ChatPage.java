@@ -11,7 +11,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -52,36 +51,65 @@ public class ChatPage extends BasePage {
     }
 
     public void linkShouldExist(String text) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".integri-chat-message-attachment-link")));
-        boolean isExistLink = driver.findElement(By.xpath("//div[@class=\"integri-chat-message-attachment integri-chat-message-attachment-link\"]")).getText().contains(text);
-        assertTrue(isExistLink, "Message do not exist");
+        boolean isExistLink = driver.findElement(By.cssSelector(".integri-chat-message-attachment")).getText().contains(text);
+        assertTrue(isExistLink, "Message with link don't have attachment");
     }
 
     public void clickEdit(int messageIndex) {
-        List<WebElement> iconEdit = driver.findElements(By.cssSelector(".integri-chat-edit-message"));
-        iconEdit.get(messageIndex-1).click();
-    }
-    public void changeTextMessage(int messageIndex, String text) {
-        List<WebElement> messageEdit = driver.findElements(By.xpath("//div[@class =\"integri-chat-message \"]/textarea"));
-        messageEdit.get(messageIndex-1).clear();
-        messageEdit.get(messageIndex-1).sendKeys(text);
-        wait.until(ExpectedConditions.textToBe(By.xpath("//div[@class =\"integri-chat-message \"]/textarea"), text));
-        clickEnter();
+        driver.findElement(By.cssSelector(".integri-chat-edit-message")).click();
+
     }
 
-    public void SendElevenMessages(String text) {
-        for (int i = 0; i < 11; i++) {
+    public void clearTextMessage(int messageIndex) {
+        driver.findElement(By.xpath("//div[@class =\"integri-chat-message \"]/textarea")).clear();
+    }
+
+    public void changeMessageText(int messageIndex, String text) {
+        driver.findElement(By.xpath("//div[@class =\"integri-chat-message \"]/textarea")).sendKeys(text);
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class =\"integri-chat-message \"]/textarea"),1));
+    }
+
+    public void errorMessageShouldExist(String error) {
+
+      /* WebElement element =  driver.findElement(ERROR_MESSAGE);
+       String error_1 = element.getText();
+       error_1.contains(error);*/
+
+        boolean isEqual = driver.findElement(ERROR_MESSAGE).getText().contains(error);
+        assertTrue(isEqual, "Error message didn't appear");
+    }
+
+    public void clickDelete(int messageIndex) {
+        driver.findElement(By.cssSelector(".integri-chat-remove-message")).click();
+    }
+
+    public void confirmAlert() {
+        driver.switchTo().alert().accept();
+    }
+
+    public void SendMoreThanTenMessages(String text, int number) {
+        for (int i = 0; i < number - 1; i++) {
             writeText(text);
-            wait.until(ExpectedConditions.textToBe(CHAT_TEXTAREA, text));
             clickSend();
+            wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector(".integri-chat-message-text"), i + 1));
         }
+        writeText(text);
+        clickSend();
+    }
+
+    public void checkWarningTrialPeriod() {
+        driver.findElement(By.cssSelector(".integri-demo-version"));
     }
 
     public void clickInvite() {
         driver.findElement(By.id("invite-users-to-chat")).click();
+
+    }
+
+    public void checkCopiedLink() {
         try {
             String link = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-            assertEquals(driver.getCurrentUrl(),link,"Link does not match current URL");
+            assertEquals(driver.getCurrentUrl(), link, "Link does not match current URL");
         } catch (UnsupportedFlavorException e) {
             e.printStackTrace();
         } catch (IOException e) {

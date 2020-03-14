@@ -59,17 +59,42 @@ public class ChatTests extends BaseTest {
         chatPage.changeTextMessage(1,"GoodBuy");
         chatPage.messageShouldExist(1, "GoodBuy");
     }
-    @Test
+
+    @Test //done
+    public void clearMessage() {
+        chatPage.openPage();
+        chatPage.isChatOpened();
+        chatPage.writeText("Hello");
+        chatPage.clickEnter();
+        chatPage.clickEdit(1);
+        chatPage.clearTextMessage(1);
+        chatPage.clickEnter();
+        chatPage.errorMessageShouldExist("Message cannot be empty!");
+    }
+
+    @Test //done
+    public void deleteMessage() {
+        chatPage.openPage();
+        chatPage.isChatOpened();
+        chatPage.writeText("Hello");
+        chatPage.clickEnter();
+        chatPage.clickDelete(1);
+        chatPage.confirmAlert();
+        chatPage.messageShouldExist(1, "removed...");
+    }
+
+    @Test //do not done
     public void checkElevenMessages() {
         chatPage.openPage();
         chatPage.isChatOpened();
-        chatPage.SendElevenMessages("Hello");
+        chatPage.SendMoreThanTenMessages("Hello", 11);
+        chatPage.checkWarningTrialPeriod();
     }
+
     @Test
     public void checkInvite() {
         chatPage.openPage();
         chatPage.clickInvite();
+        chatPage.checkCopiedLink();
     }
-
-
 }
