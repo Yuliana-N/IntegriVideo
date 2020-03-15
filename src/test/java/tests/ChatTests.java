@@ -15,7 +15,7 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(textMessage);
         chatPage.clickSend();
-        chatPage.messageShouldExist(1, textMessage);
+        chatPage.messageShouldExist(textMessage);
     }
 
     @Test //done
@@ -24,7 +24,7 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(textMessage);
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1, textMessage);
+        chatPage.messageShouldExist(textMessage);
     }
 
     @Test //done
@@ -33,7 +33,7 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(longMessage);
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1, longMessage);
+        chatPage.messageShouldExist(longMessage);
     }
 
     @Test // done
@@ -42,7 +42,7 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(link);
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1, link);
+        chatPage.messageShouldExist(link);
         chatPage.linkShouldExist(siteDescription);
     }
 
@@ -52,7 +52,7 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(htmlCode);
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1, htmlCode);
+        chatPage.messageShouldExist( htmlCode);
     }
 
     @Test //do not done
@@ -61,11 +61,11 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(textMessage);
         chatPage.clickEnter();
-        chatPage.clickEdit(1);
-        chatPage.clearTextMessage(1);
-        chatPage.changeMessageText(1, textMessage + "change");
+        chatPage.clickEdit();
+        chatPage.clearTextMessage();
+        chatPage.changeMessageText(textMessage + "change");
         chatPage.clickEnter();
-        chatPage.messageShouldExist(1, textMessage + "change");
+        chatPage.messageShouldExist(textMessage + "change");
     }
 
     @Test //done
@@ -74,8 +74,8 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(textMessage);
         chatPage.clickEnter();
-        chatPage.clickEdit(1);
-        chatPage.clearTextMessage(1);
+        chatPage.clickEdit();
+        chatPage.clearTextMessage();
         chatPage.clickEnter();
         chatPage.errorMessageShouldExist("Message cannot be empty!");
     }
@@ -86,9 +86,9 @@ public class ChatTests extends BaseTest {
         chatPage.isChatOpened();
         chatPage.writeText(textMessage);
         chatPage.clickEnter();
-        chatPage.clickDelete(1);
+        chatPage.clickDelete();
         chatPage.confirmAlert();
-        chatPage.messageShouldExist(1, "removed...");
+        chatPage.messageShouldExist( "removed...");
     }
 
     @Test //do not done

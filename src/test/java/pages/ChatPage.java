@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -19,6 +18,10 @@ public class ChatPage extends BasePage {
     private final static By CHAT_INPUT = By.cssSelector(".integri-chat-send-message");
     private final static By CHAT_TEXTAREA = By.cssSelector("textarea");
     private final static By ERROR_MESSAGE = By.cssSelector(".integri-notify-error");
+    private final static By TEXT_IN_MESSAGE = By.cssSelector(".integri-chat-message-text");
+    private final static By MESSAGE_CONTAINER = By.cssSelector(".integri-chat-message-container");
+    private final static By EDIT_AREA = By.xpath("//div[@class =\\\"integri-chat-message \\\"]/textarea\"");
+
 
     public ChatPage(WebDriver driver) {
         super(driver);
@@ -42,12 +45,13 @@ public class ChatPage extends BasePage {
 
     public void clickEnter() {
         driver.findElement(CHAT_TEXTAREA).sendKeys(Keys.ENTER);
+        //
     }
 
-    public void messageShouldExist(int messageIndex, String text) {
-      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".integri-chat-message-container")));
-        List<WebElement> message = driver.findElements(By.cssSelector(".integri-chat-message-text"));
-        boolean isExist = message.get(messageIndex - 1).getText().equals(text);
+    public void messageShouldExist(String text) {
+        WebElement message = driver.findElement(By.cssSelector(".integri-chat-message-text"));
+        String mes = message.getText();
+        boolean isExist = message.getText().contains(text);
         assertTrue(isExist, "Message do not exist");
     }
 
@@ -56,18 +60,16 @@ public class ChatPage extends BasePage {
         assertTrue(isExistLink, "Message with link don't have attachment");
     }
 
-    public void clickEdit(int messageIndex) {
+    public void clickEdit() {
         driver.findElement(By.cssSelector(".integri-chat-edit-message")).click();
-
     }
 
-    public void clearTextMessage(int messageIndex) {
+    public void clearTextMessage() {
         driver.findElement(By.xpath("//div[@class =\"integri-chat-message \"]/textarea")).clear();
     }
 
-    public void changeMessageText(int messageIndex, String text) {
+    public void changeMessageText(String text) {
         driver.findElement(By.xpath("//div[@class =\"integri-chat-message \"]/textarea")).sendKeys(text);
-        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@class =\"integri-chat-message \"]/textarea"),1));
     }
 
     public void errorMessageShouldExist(String error) {
@@ -80,7 +82,7 @@ public class ChatPage extends BasePage {
         assertTrue(isEqual, "Error message didn't appear");
     }
 
-    public void clickDelete(int messageIndex) {
+    public void clickDelete() {
         driver.findElement(By.cssSelector(".integri-chat-remove-message")).click();
     }
 
