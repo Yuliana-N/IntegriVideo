@@ -5,12 +5,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import pages.ChatPage;
+import pages.SettingsModalPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     private WebDriver driver;
     ChatPage chatPage;
+    SettingsModalPage settingsModalPage;
 
     @BeforeTest
     public void setDriver(){
@@ -19,6 +21,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         chatPage = new ChatPage(driver);
+        settingsModalPage = new SettingsModalPage(driver);
     }
 
     @AfterTest(alwaysRun = true)
