@@ -18,6 +18,7 @@ import static org.testng.Assert.assertTrue;
 public class ChatPage extends BasePage {
     private final static By CHAT_INPUT = By.cssSelector(".integri-chat-send-message");
     private final static By CHAT_TEXTAREA = By.cssSelector("textarea");
+    private final static By ERROR_MESSAGE = By.cssSelector(".integri-notify-error");
 
     public ChatPage(WebDriver driver) {
         super(driver);
@@ -44,7 +45,7 @@ public class ChatPage extends BasePage {
     }
 
     public void messageShouldExist(int messageIndex, String text) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".integri-chat-message-container")));
+      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".integri-chat-message-container")));
         List<WebElement> message = driver.findElements(By.cssSelector(".integri-chat-message-text"));
         boolean isExist = message.get(messageIndex - 1).getText().equals(text);
         assertTrue(isExist, "Message do not exist");

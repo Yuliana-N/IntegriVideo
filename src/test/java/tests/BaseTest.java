@@ -20,8 +20,9 @@ public class BaseTest {
         driver.manage().window().maximize();
         chatPage = new ChatPage(driver);
     }
+
     @AfterTest(alwaysRun = true)
-    public void closeDriver(){
+    public void closeDriver() {
         driver.quit();
     }
 }
