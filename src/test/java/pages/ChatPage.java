@@ -45,17 +45,27 @@ public class ChatPage extends BasePage {
 
     public void clickEnter() {
         driver.findElement(CHAT_TEXTAREA).sendKeys(Keys.ENTER);
-        //
     }
 
     public void messageShouldExist(String text) {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(text(), '" + text + "')]"))));
         WebElement message = driver.findElement(By.cssSelector(".integri-chat-message-text"));
         String mes = message.getText();
         boolean isExist = message.getText().contains(text);
         assertTrue(isExist, "Message do not exist");
+
     }
 
     public void linkShouldExist(String text) {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(text(), '" + text + "')]"))));
+        WebElement message = driver.findElement(By.cssSelector(".integri-chat-message-text"));
+        String mes = message.getText();
+        boolean isExist = message.getText().contains(text);
+        assertTrue(isExist, "Message do not exist");
+
+    }
+
+    public void linkShouldExistAttachment(String text) {
         boolean isExistLink = driver.findElement(By.cssSelector(".integri-chat-message-attachment")).getText().contains(text);
         assertTrue(isExistLink, "Message with link don't have attachment");
     }
