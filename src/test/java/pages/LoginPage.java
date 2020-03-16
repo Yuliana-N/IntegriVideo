@@ -38,7 +38,7 @@ public class LoginPage extends BasePage {
         return this;
     }
     public LoginPage writePassword(String password) {
-        emailField.sendKeys(password);
+        passwordField.sendKeys(password);
         return this;
     }
     public ProjectPage clickLogin() {
