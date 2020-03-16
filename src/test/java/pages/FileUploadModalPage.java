@@ -16,6 +16,14 @@ public class FileUploadModalPage extends BasePage {
         super(driver);
     }
 
+    public BasePage openPage() {
+        return null;
+    }
+
+    public BasePage isPageOpened() {
+        return null;
+    }
+
     public void OpenDrugNDrop() {
         driver.findElement(By.cssSelector(".integri-chat-manual-upload")).click();
     }

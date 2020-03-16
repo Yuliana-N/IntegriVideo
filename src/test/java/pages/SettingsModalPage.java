@@ -11,6 +11,14 @@ public class SettingsModalPage extends BasePage {
         super(driver);
     }
 
+    public BasePage openPage() {
+        return null;
+    }
+
+    public BasePage isPageOpened() {
+        return null;
+    }
+
     public void openSettingsModal() {
         driver.findElement(By.cssSelector(".integri-chat-settings")).click();
     }

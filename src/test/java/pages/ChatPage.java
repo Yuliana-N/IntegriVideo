@@ -31,8 +31,13 @@ public class ChatPage extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    public ChatPage openPage() {
         driver.get("https://dev.integrivideo.com/demo/chat/new");
+        return this;
+    }
+
+    public BasePage isPageOpened() {
+        return null;
     }
 
     public void isChatOpened() {
