@@ -21,7 +21,7 @@ public class FileUploadModalTests extends BaseTest {
         chatPage.openPage();
         chatPage.isChatOpened();
         fileUploadModalPage.OpenDrugNDrop();
-        fileUploadModalPage.UploadFile("D:\\work2\\TechMe\\Testing\\IntegriVideo_\\src\\main\\resources\\TextFileIntegrivideo.txt");
+        fileUploadModalPage.UploadFile(File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "TextFileIntegrivideo.txt");
         fileUploadModalPage.ClickStart();
         fileUploadModalPage.CheckUploadFile(textFile);
     }
@@ -31,8 +31,8 @@ public class FileUploadModalTests extends BaseTest {
         chatPage.openPage();
         chatPage.isChatOpened();
         fileUploadModalPage.OpenDrugNDrop();
-        fileUploadModalPage.UploadFile("D:\\work2\\TechMe\\Testing\\IntegriVideo_\\src\\main\\resources\\TextFileIntegrivideo.txt");
-        fileUploadModalPage.UploadFile("D:\\work2\\TechMe\\Testing\\IntegriVideo_\\src\\main\\resources\\TextFileIntegrivideo_2.txt");
+        fileUploadModalPage.UploadFile(File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "TextFileIntegrivideo.txt");
+        fileUploadModalPage.UploadFile(File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "TextFileIntegrivideo_2.txt");
         fileUploadModalPage.ClickStart();
         fileUploadModalPage.CheckUploadFiles(createCollection());
     }
