@@ -10,12 +10,15 @@ public class ProjectTests extends BaseTest {
     ProjectPage project;
     @Test
     public void createProject() {
-        User user = new User("nyintegrivideo@mailinator.com","qwerty-21");
-            loginPage
+        User user = new User("project@mailinator.com","QWERty123");
+        loginPage
                     .openPage()
                     .login(user);
         projectPage
                 .isPageOpened()
-                .clickAddProject();
+                .clickAddProject()
+                .addProject("onliner","description","http://onliner.by","http://tut.by")
+                .clickCreate()
+                .checkAddedProject();
     }
 }

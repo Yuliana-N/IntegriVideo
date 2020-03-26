@@ -16,10 +16,12 @@ public class FileUploadModalPage extends BasePage {
         super(driver);
     }
 
+    @Override
     public BasePage openPage() {
         return null;
     }
 
+    @Override
     public BasePage isPageOpened() {
         return null;
     }
@@ -39,7 +41,7 @@ public class FileUploadModalPage extends BasePage {
     public void CheckUploadFile(String fileName) {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".integri-chat-message-attachment-file"))));
         boolean isEqualsFileName = driver.findElement(By.cssSelector(".integri-chat-message-attachment-file-name")).getText().contains(fileName);
-            assertTrue( isEqualsFileName, "Upload error");
+        assertTrue( isEqualsFileName, "Upload error");
     }
 
 

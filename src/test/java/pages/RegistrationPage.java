@@ -4,14 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.testng.Assert.assertTrue;
+
 public class RegistrationPage extends BasePage {
+    String s = "//*[(text()='%s')]";
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
     public RegistrationPage openPage() {
-        driver.get("https://www.integrivideo.com/signup");
+        driver.get("https://dev.integrivideo.com/signup");
         return this;
     }
 
@@ -34,8 +37,11 @@ public class RegistrationPage extends BasePage {
         driver.findElement(By.cssSelector(".btn-primary")).click();
         return this;
     }
-   /* public void verifySignUp(){
-        driver.findElement(By.cssSelector())
 
-    }*/
+    public RegistrationPage checkSignUp(String text) {
+        boolean isOK = driver.findElement(By.xpath(String.format(s, text))).isDisplayed();
+        assertTrue(isOK, "Registration failed");
+        return this;
+
+    }
 }

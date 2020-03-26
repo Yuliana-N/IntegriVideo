@@ -25,17 +25,20 @@ public class ChatPage extends BasePage {
     private final static By ATTACHMENT_IN_MESSAGE = By.cssSelector(".integri-chat-message-attachment");
     private final static By EDIT_AREA = By.xpath("//div[@class =\"integri-chat-message \"]/textarea");
     private final static By DEMO = By.cssSelector(".integri-demo-version");
+    private String locator_text = "//div[contains(text(), '%s')]";
 
 
     public ChatPage(WebDriver driver) {
         super(driver);
     }
 
-    public ChatPage openPage() {
+    @Override
+    public BasePage openPage() {
         driver.get("https://dev.integrivideo.com/demo/chat/new");
         return this;
     }
 
+    @Override
     public BasePage isPageOpened() {
         return null;
     }
@@ -57,7 +60,7 @@ public class ChatPage extends BasePage {
     }
 
     public void messageShouldExist(String text) {
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(text(), '" + text + "')]"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(locator_text,text)))));
         WebElement message = driver.findElement(TEXT_IN_MESSAGE);
         String mes = message.getText();
         boolean isExist = message.getText().contains(text);
@@ -66,7 +69,7 @@ public class ChatPage extends BasePage {
     }
 
     public void linkShouldExist(String text) {
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[contains(text(), '" + text + "')]"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(locator_text,text)))));
         WebElement message = driver.findElement(TEXT_IN_MESSAGE);
         String mes = message.getText();
         boolean isExist = message.getText().contains(text);
