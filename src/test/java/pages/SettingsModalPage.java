@@ -11,6 +11,16 @@ public class SettingsModalPage extends BasePage {
         super(driver);
     }
 
+    @Override
+    public BasePage openPage() {
+        return null;
+    }
+
+    @Override
+    public BasePage isPageOpened() {
+        return null;
+    }
+
     public void openSettingsModal() {
         driver.findElement(By.cssSelector(".integri-chat-settings")).click();
     }
@@ -47,10 +57,6 @@ public class SettingsModalPage extends BasePage {
         assertTrue(isNameRenamed, "Name has't been changed");
     }
 
-//    public void checkEmailRenamed(String email) {
-//        boolean isNameRenamed = driver.findElement(By.cssSelector(".integri-session-user-name")).getText().equals(email);
-//        assertTrue(isNameRenamed, "Email has't been changed");
-//    }
 
     public void checkPhotoChanged(String URL) {
         boolean isEqualURL = driver.findElement(By.cssSelector(".integri-user-pic")).getAttribute("style").contains(URL);

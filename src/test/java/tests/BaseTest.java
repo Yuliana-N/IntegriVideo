@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import pages.ChatPage;
-import pages.FileUploadModalPage;
-import pages.SettingsModalPage;
+import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +13,9 @@ public class BaseTest {
     ChatPage chatPage;
     SettingsModalPage settingsModalPage;
     FileUploadModalPage fileUploadModalPage;
+    RegistrationPage registrationPage;
+    LoginPage loginPage;
+    ProjectPage projectPage;
 
     @BeforeTest
     public void setDriver(){
@@ -25,6 +26,9 @@ public class BaseTest {
         chatPage = new ChatPage(driver);
         settingsModalPage = new SettingsModalPage(driver);
         fileUploadModalPage = new FileUploadModalPage(driver);
+        registrationPage = new RegistrationPage(driver);
+        loginPage = new LoginPage(driver);
+        projectPage = new ProjectPage(driver);
     }
 
     @AfterTest(alwaysRun = true)
