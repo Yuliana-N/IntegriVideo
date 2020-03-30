@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import pages.*;
+import steps.LoginSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,7 @@ public class BaseTest {
     FileUploadModalPage fileUploadModalPage;
     RegistrationPage registrationPage;
     LoginPage loginPage;
+    LoginSteps loginSteps;
     ProjectPage projectPage;
 
     @BeforeTest
@@ -27,6 +29,7 @@ public class BaseTest {
         settingsModalPage = new SettingsModalPage(driver);
         fileUploadModalPage = new FileUploadModalPage(driver);
         registrationPage = new RegistrationPage(driver);
+        loginSteps = new LoginSteps(driver);
         loginPage = new LoginPage(driver);
         projectPage = new ProjectPage(driver);
     }

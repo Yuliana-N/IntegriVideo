@@ -54,6 +54,7 @@ public class LoginPage extends BasePage {
         writeEmail(user.getEmail());
         writePassword(user.getPassword());
         ckickLogin();
+        AllureUtils.takeScreenshot(driver);
     }
 
 

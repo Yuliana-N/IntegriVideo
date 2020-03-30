@@ -11,9 +11,8 @@ public class ProjectTests extends BaseTest {
     @Test
     public void createProject() {
         User user = new User("project@mailinator.com","QWERty123");
-        loginPage
-                    .openPage()
-                    .login(user);
+        loginSteps
+                .login(user);
         projectPage
                 .isPageOpened()
                 .clickAddProject()
