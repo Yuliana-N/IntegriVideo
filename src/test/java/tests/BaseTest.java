@@ -2,7 +2,9 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
 import steps.LoginSteps;
@@ -19,7 +21,7 @@ public class BaseTest {
     LoginSteps loginSteps;
     ProjectPage projectPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void setDriver(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
@@ -34,7 +36,7 @@ public class BaseTest {
         projectPage = new ProjectPage(driver);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void closeDriver() {
         driver.quit();
     }

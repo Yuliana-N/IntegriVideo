@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
-import utils.AllureUtils;
 
 public class LoginSteps {
     private LoginPage page;
